@@ -11,7 +11,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='motils',
-    version='0.1',
+    version='0.1.1',
     packages=[''],
     url='https://github.com/neuhofmo/motils',
     license='MIT',

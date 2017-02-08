@@ -6,6 +6,7 @@ import os
 import re
 import tarfile
 import zipfile
+from stat import S_IEXEC
 from time import strftime
 
 
@@ -29,6 +30,7 @@ def remove_commas(file_name, new_file_name=None):
     with open(new_file_name, 'w') as f:  # now writing
         f.write(text)
     return new_file_name
+
 
 def zip_files(file_list, output_path):
     """Writing a file_list to zip at output_path"""
@@ -93,7 +95,7 @@ def write_bash_script(command_line, write_folder, script_name="run_script.sh"):
         script.write("# The script is designed to run the following command:\n")
         script.write(command_line)
     # run permissions for the script:
-    os.chmod(script_path, 0751)
+    os.fchmod(script_path, S_IEXEC)
     return script_path
 
 
