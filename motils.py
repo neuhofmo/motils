@@ -18,14 +18,17 @@ def file_to_string(file_name):
     return text
 
 
-def remove_commas(file_name):
+def remove_commas(file_name, new_file_name=None):
     """Replaces commas with newlines in a file."""
+    if not new_file_name:
+        new_file_name = "{}_nocommas".format(file_name)
+
     with open(file_name, 'r') as f:
         text = f.read()
         text = replace(text, ',', '\n')
-    with open(file_name, 'w') as f:  # now writing
+    with open(new_file_name, 'w') as f:  # now writing
         f.write(text)
-    return file_name
+    return new_file_name
 
 def zip_files(file_list, output_path):
     """Writing a file_list to zip at output_path"""
@@ -38,7 +41,7 @@ def zip_files(file_list, output_path):
 
 
 # debugging function
-def debug_s(debug_string, to_debug):
+def debug(debug_string, to_debug):
     """
     Receives a string and prints it, with a timestamp.
     :param debug_string: a string to print
@@ -79,7 +82,7 @@ def targz_folder(folder, archive_name=None):
     return archive_name
 
 
-def write_blast_run_script(command_line, write_folder, script_name="run_script.sh"):
+def write_bash_script(command_line, write_folder, script_name="run_script.sh"):
     """
     Writing a bash script, and giving it run permissions.
     Receive command line, write folder and an optional script name.
